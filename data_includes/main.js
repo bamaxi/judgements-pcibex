@@ -156,51 +156,8 @@ newTrial("context_practice" ,
     getText("test").remove()          // End of trial, remove "target"
 )
 
-newTrial("practice" ,
-    // Text element at the top of the page to signal this is a practice trial
-    newText("practice").color("blue").print("center at 50vw","top at 1em")
-    ,
-    // Display all future Text elements centered on the page, and log their display time code
-    defaultText.center().print("center at 50vw","middle at 50vh")
-    ,
-    // Automatically start and wait for Timer elements when created
-    defaultTimer.start().wait()
-    ,
-    // Mask, shown on screen for 500ms
-    newText("mask","######"),
-    newTimer("maskTimer", 500),                       
-    getText("mask").remove()
-    ,
-    // Prime, shown on screen for 42ms
-    newText("prime","flower"),
-    newTimer("primeTimer", 42),
-    getText("prime").remove()
-    ,
-    // Target, shown on screen until F or J is pressed
-    newText("target","FLOWER")
-    ,
-    // Use a tooltip to give instructions
-    newTooltip("guide", "Now press F if this is an English word, J otherwise")
-        .position("bottom center")  // Display it below the element it attaches to
-        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
-        .print(getText("target"))   // Attach to the "target" Text element
-    ,
-    newKey("answerTarget", "FJ")
-        .wait()                 // Only proceed after a keypress on F or J
-        .test.pressed("F")      // Set the "guide" Tooltip element's feedback text accordingly
-        .success( getTooltip("guide").text("<p>Yes, FLOWER <em>is</em> an English word</p>") )
-        .failure( getTooltip("guide").text("<p>You should press F: FLOWER <em>is</em> an English word</p>") )
-    ,
-    getTooltip("guide")
-        .label("Press SPACE to start")  // Add a label to the bottom-right corner
-        .key(" ")                       // Pressing Space will close the tooltip
-        .wait()                         // Proceed only when the tooltip is closed
-    ,
-    getText("target").remove()          // End of trial, remove "target"
-)
-
 // Executing experiment from example_list.csv table, where participants are divided into four groups (A - D)
-Template( "example_list.csv" , 
+Template( "examples.csv" , 
     row => newTrial( "experiment" ,   
         // Display all Text elements centered on the page, and log their display time code
         // defaultText.center().print("center at 50vw","middle at 50vh").log()
@@ -208,10 +165,15 @@ Template( "example_list.csv" ,
         // Automatically start and wait for Timer elements when created, and log those events
         defaultTimer.log().start().wait()
         ,
-        newText("context",row.context)
-            .print("center at 50%", "center at 20%")
+        newTimer("break", 800)
+            .start()
+            .wait()
         ,
-        newText("target",row.target)
+        newText("context",row.context),
+        getText("context").test.text(/^.+$/)
+            .success(self.print("center at 50%", "center at 20%"))
+        ,
+        newText("item",row.item)
             .italic()
               .print("center at 50%", "center at 50%")
         ,
@@ -225,12 +187,17 @@ Template( "example_list.csv" ,
               .wait()
         // End of trial, move to next one
     )
-    .log("Group"     , row.group)      // Append group (A vs B) to each result line
-    .log("Condition" , row.condition)  // Append condition (tr. v op. v fi.) to each result line
-    .log("Expected"  , row.expected )  // Append expectped (f vs j) to each result line
-    .log("PrimeType", row.primetype )  // Append prime type (rel. vs unr.) to each result line
-    .log("context", row.context)       // log context also
-    .log("target", row.target)         // log target as well
+    // .log("Group"     , row.group)      // Append group (A vs B) to each result line
+    // .log("Condition" , row.condition)  // Append condition (tr. v op. v fi.) to each result line
+    // .log("Expected"  , row.expected )  // Append expectped (f vs j) to each result line
+    // .log("PrimeType", row.primetype )  // Append prime type (rel. vs unr.) to each result line
+    // .log("context", row.context)       // log context also
+    // .log("target", row.target)         // log target as well
+    .log("group", row.group)
+    .log("pair_id", row.pair_id)
+    .log("item_id", row.item_id)
+    .log("context_id", row.context_id)
+    .log("type",row.type)
     // socio data should potentially be carried to "instruction" or "final" log,
     //  so it isn't over multiplied
     .log("PersonId", getVar("PersonId"))
