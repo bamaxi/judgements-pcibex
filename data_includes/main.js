@@ -1,6 +1,6 @@
 PennController.ResetPrefix(null) // Shorten command names (keep this line here))
 
-// DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
+DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
 
 // Start with welcome screen, then present test trials in a random order,
 // and show the final screen after sending the results
@@ -94,6 +94,10 @@ newTrial( "instructions" ,
     newVar("PersonAge").global()
         .set(getTextInput("PersonAge"))
 )
+    .log("PersonId", getVar("PersonId"))
+    .log("PersonGender", getVar("PersonGender"))
+    .log("PersonPlace", getVar("PersonPlace"))
+    .log("PersonAge", getVar("PersonAge"))
 
 newTrial("context_practice" ,
     defaultText.print()
@@ -184,6 +188,8 @@ Template( "examples.csv" ,
             .italic()
               .print("center at 50%", "center at 50%")
         ,
+        newVar("RT").global().set( v=>Date.now() )
+        ,
         newScale("score", 5)
             .center()
             .cssContainer({"font-size": "medium"})
@@ -192,6 +198,8 @@ Template( "examples.csv" ,
             .log()
               .print("center at 50%", "center at 80%")
               .wait()
+        ,
+        getVar("RT").set( v=>Date.now()-v )
         // End of trial, move to next one
     )
     // .log("Group"     , row.group)      // Append group (A vs B) to each result line
@@ -205,12 +213,13 @@ Template( "examples.csv" ,
     .log("item_id", row.item_id)
     .log("context_id", row.context_id)
     .log("type",row.type)
+    .log("RT", getVar("RT"))
     // socio data should potentially be carried to "instruction" or "final" log,
     //  so it isn't over multiplied
-    .log("PersonId", getVar("PersonId"))
-    .log("PersonGender", getVar("PersonGender"))
-    .log("PersonPlace", getVar("PersonPlace"))
-    .log("PersonAge", getVar("PersonAge"))
+    // .log("PersonId", getVar("PersonId"))
+    // .log("PersonGender", getVar("PersonGender"))
+    // .log("PersonPlace", getVar("PersonPlace"))
+    // .log("PersonAge", getVar("PersonAge"))
 )
 
 // Send the results
