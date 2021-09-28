@@ -20,3 +20,13 @@
 .Tooltip a {
     font-style: italic;
 }
+
+.Tooltip-container p {
+    text-align: justify;
+    padding: 5px;
+}
+
+.Scale {
+    transform: scale(2);
+    font-size: large;
+}

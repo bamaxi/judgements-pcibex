@@ -4,7 +4,7 @@ PennController.ResetPrefix(null) // Shorten command names (keep this line here))
 
 // Start with welcome screen, then present test trials in a random order,
 // and show the final screen after sending the results
-Sequence("instructions" "context_practice", randomize("experiment") , "send" , "final" )
+Sequence("instructions", "context_practice", randomize("experiment") , "send" , "final" )
 
 Header( /* void */ )
     // This .log command will apply to all trials
@@ -43,7 +43,7 @@ newTrial( "instructions" ,
     ,
     newText("instruction_keys", "Оценки следует ставить, <b>нажимая цифры на клавиатуре</b> компьютера.")
     ,
-    newText("instruction_context", "Предложения в форме МОГУТ быть представлены в контексте (но необязательно).\
+    newText("instruction_context", "Предложения в форме <b>могут</b> быть представлены в контексте (но необязательно).\
                 Обратите внимание, оценить нужно только предложение, написанное курсивом,\
                 контекст оценивать не нужно.")
     ,
@@ -73,7 +73,7 @@ newTrial( "instructions" ,
     ,
     newButton("instruction_consent", "Я соглашаюсь участвовать в эксперименте и подтверждаю,<br />\
                     что русский - мой родной язык, и мне 18 или более лет.")
-        .cssContainer({"margin-bottom":"3em"})
+        .cssContainer({"margin-bottom":"3em", "font-size": "large"})
         .center().print()
         .wait(getTextInput("PersonAge").test.text(/^(?:18|19|[2-9][0-9])$/)
               .and(getTextInput("PersonId").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
@@ -123,23 +123,23 @@ newTrial("context_practice" ,
     //         .keys("1", "2", "3", "4", "5")
     //         .wait()
     // tooltip to give instructions
-    newTooltip("guide", "Оцените это предложение от 1 до 5, где 1 - неприемлемое предложение,\
-                а 5 - полностью приемлемое")
+    newTooltip("guide", "Оцените это предложение от 1 до 5, <br />\
+                    где 1 - неприемлемое предложение,<br />\
+                    а 5 - полностью приемлемое")
         .position("bottom center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("test"))   // Attach to the "target" Text element
     ,
     newScale("score", 5)
         .center()
-        .cssContainer({"font-size": "medium"})
         .labelsPosition("top")
         .keys()
         .log()
           .print("center at 50%", "center at 80%")
           .wait().test.selected(1)
-          .success(getTooltip("guide").text("<p>Верно, это предложение неграмматичное\
+          .success(getTooltip("guide").text("<p>Верно, это предложение неграмматичное<br />\
                     и должно быть оценено на 1</p>") )
-          .failure(getTooltip("guide").text("<p>Нужно нажать '1', потому что\
+          .failure(getTooltip("guide").text("<p>Нужно нажать '1', потому что<br />\
                     это предложение неграмматично (неверно 'я придЁТ') </p>") )
     ,
     
@@ -153,7 +153,7 @@ newTrial("context_practice" ,
         .key(" ")                       // Pressing Space will close the tooltip
         .wait()                         // Proceed only when the tooltip is closed
     ,
-    getText("target").remove()          // End of trial, remove "target"
+    getText("test").remove()          // End of trial, remove "target"
 )
 
 newTrial("practice" ,
