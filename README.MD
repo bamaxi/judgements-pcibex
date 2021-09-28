@@ -1,3 +1,5 @@
+[гугл-таблица с примерами](https://docs.google.com/spreadsheets/d/1JUbcdcdPKNh4IcCyy49_2JkguGrsgQbC89i5jAu6PUg/edit?usp=sharing) в нужном формате и с описанием
+
 Ссылка на эксперимент: https://farm.pcibex.net/p/rmFVgv/
 
 [группа A](https://farm.pcibex.net/p/rmFVgv/server.py?withsquare=0)

@@ -148,10 +148,17 @@ newTrial("context_practice" ,
     //     .test.pressed("F")      // Set the "guide" Tooltip element's feedback text accordingly
     //     .success( getTooltip("guide").text("<p>Yes, FLOWER <em>is</em> an English word</p>") )
     //     .failure( getTooltip("guide").text("<p>You should press F: FLOWER <em>is</em> an English word</p>") )
-    getTooltip("guide")
-        .label("Нажмите ПРОБЕЛ, чтобы продолжить")  // Add a label to the bottom-right corner
-        .key(" ")                       // Pressing Space will close the tooltip
-        .wait()                         // Proceed only when the tooltip is closed
+    
+    // getTooltip("guide")
+    //     .label("Нажмите ПРОБЕЛ, чтобы продолжить")  // Add a label to the bottom-right corner
+    //     .key(" ")                       // Pressing Space will close the tooltip
+    //     .wait()                         // Proceed only when the tooltip is closed
+    // ,
+    
+    newButton("continue", "Продолжить")
+        .cssContainer({"transform": "scale(1.8)"})
+        .center().print("center at 50%", "center at 92%")
+        .wait()
     ,
     getText("test").remove()          // End of trial, remove "target"
 )
