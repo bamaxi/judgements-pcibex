@@ -165,7 +165,7 @@ Template( "examples.csv" ,
         // Automatically start and wait for Timer elements when created, and log those events
         defaultTimer.log().start().wait()
         ,
-        newTimer("break", 800)
+        newTimer("break", 300)
             .start()
             .wait()
         ,
@@ -207,7 +207,7 @@ Template( "examples.csv" ,
 )
 
 // Send the results
-SendResults("Отправить результаты")
+SendResults("send")
 
 // A simple final screen
 newTrial ( "final" ,
