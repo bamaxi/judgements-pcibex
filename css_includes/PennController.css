@@ -26,11 +26,17 @@
     padding: 5px;
 }
 
-.Scale {
+.score-container {
     transform: scale(1.8);
     font-size: large;
 }
 
+.PersonKnowsOther-container {
+    transform: scale(1.2);
+    font-size: medium;
+}
+
 .context {
     padding: 8px;
+    font-size: x-large;
 }

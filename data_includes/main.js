@@ -16,11 +16,11 @@ newTrial( "instructions" ,
     defaultText.cssContainer({"margin-bottom":"1em", "text-align":"justify", "font-size":"medium"})
         .print()
     ,
-    newText("instruction_welcome", "Спасибо за ваш интерес к нашему лингвистическому эксперименту!\
+    newText("instruction_welcome", "Спасибо за Ваш интерес к нашему лингвистическому эксперименту!\
                 Участие в нем займёт около 10-15 минут. ПРОЧТИТЕ, ПОЖАЛУЙСТА, ИНСТРУКЦИЮ ЦЕЛИКОМ.")
     ,
     newText("instruction_task", "Вашей задачей будет оценить приемлемость предложений по 5-балльной шкале.\
-                Если Вам кажется абсолютно естественным встретить или употребить такое предложение в устной речи,\
+                Если Вам кажется абсолютно естественным услышать или употребить такое предложение в устной речи,\
                 ставьте оценку 5. Если же Вам кажется, что носитель русского языка так никогда бы не сказал,\
                 ставьте оценку 1. Промежуточные варианты (предложения, которые кажутся Вам допустимыми,\
                 но почему-то не очень хорошими) оценивайте как 4, 3 или 2,\
@@ -30,9 +30,8 @@ newTrial( "instructions" ,
                 но полностью грамматически верное. С другой стороны, можно понять смысл предложения\
                 \"Двор стемнел, и мы зажгли лампу\", но грамматически оно недопустимо.")
     ,
-    newText("instruction_intuition", "При оценке ориентируйтесь на собственное чувство русского языка,\
-                а не на правила, изучаемые, например, в школе. Наиболее ценной является первичная,\
-                интуитивная реакция на предложение.")
+    newText("instruction_intuition", "При оценке ориентируйтесь на собственную интуицию носителя русского языка.\
+                Постарайтесь давать оценку быстро, опираясь на свои первые ощущения.")
     ,
     newText("instruction_scale", "Если кратко, то:<br />\
                 “5” - полностью приемлемое для вас предложение<br />\
@@ -66,6 +65,19 @@ newTrial( "instructions" ,
     newTextInput("PersonAge")
         .center().print()
     ,
+    newText("instruction_get_other_languages", "Русский язык является вашим единственным родным языком?").center(),
+    newScale("PersonKnowsOther", "да", "нет")
+        .labelsPosition("top")
+        .center().print()
+    ,
+    // newTextInput("PersonOtherLanguages").center(),
+    // getScale("PersonKnowsOther").test.selected("да")
+    //     .success(newText("instruction_optional_get_languages",
+    //                 "при желании, укажите эти языки").center())
+    // ,
+    // getScale("PersonKnowsOther").test.selected("да")
+    //     .success(getTextInput("PersonOtherLanguages"))
+    // ,                                                                      
     newText("instruction_thanks", "Спасибо, что помогаете нам и науке!")
     ,
     newText("instruction_contact_us", "Если у Вас есть вопросы, напишите нам по почте\
@@ -79,6 +91,7 @@ newTrial( "instructions" ,
               .and(getTextInput("PersonId").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonGender").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonPlace").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
+              .and(getScale("PersonKnowsOther").test.selected()
         )
     ,
     // newKey(" ").wait()  // Finish trial upon press on spacebar
@@ -93,11 +106,16 @@ newTrial( "instructions" ,
     ,
     newVar("PersonAge").global()
         .set(getTextInput("PersonAge"))
+    ,
+    newVar("PersonKnowsOther").global()
+        .set(getScale("PersonKnowsOther"))
 )
     .log("PersonId", getVar("PersonId"))
     .log("PersonGender", getVar("PersonGender"))
     .log("PersonPlace", getVar("PersonPlace"))
     .log("PersonAge", getVar("PersonAge"))
+    .log("PersonKnowsOther", getVar("PersonKnowsOther"))
+)
 
 newTrial("context_practice" ,
     defaultText.print()
@@ -110,7 +128,7 @@ newTrial("context_practice" ,
     // ,
     newText("test", "Если я придёт вовремя, то меня не будут ругать")
         .italic()
-        .print("center at 50%", "center at 50%")
+        .print("center at 50%", "center at 30%")
     ,
     
     // newText("q1", "1"),
