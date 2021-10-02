@@ -83,6 +83,9 @@ newTrial( "instructions" ,
     newText("instruction_contact_us", "Если у Вас есть вопросы, напишите нам по почте\
                 %%ЧЬЯ-ТО ПОЧТА (oa.bazhukov@gmail.com)%%")
     ,
+    newText("instruction_button_form_correctness", "Если кнопка ниже не срабатывает, проверьте,\
+                пожалуйста, корректность введённых выше данных.")
+    ,
     newButton("instruction_consent", "Я соглашаюсь участвовать в эксперименте и подтверждаю,<br />\
                     что русский - мой родной язык, и мне 18 или более лет.")
         .cssContainer({"margin-bottom":"3em", "font-size": "large"})
@@ -90,7 +93,7 @@ newTrial( "instructions" ,
         .wait(getTextInput("PersonAge").test.text(/^(?:18|19|[2-9][0-9])$/)
               .and(getTextInput("PersonId").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonGender").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
-              .and(getTextInput("PersonPlace").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
+              .and(getTextInput("PersonPlace").test.text(/^(?:\w+-?|[а-яА-Я]+-?| )+$/))
               .and(getScale("PersonKnowsOther").test.selected()
         )
     ,
