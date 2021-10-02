@@ -36,7 +36,7 @@
     font-size: medium;
 }
 
-.context {
-    padding: 8px;
-    font-size: x-large;
+.context-item {
+    padding: 0% 5%;
+    /*font-size: x-large;*/
 }

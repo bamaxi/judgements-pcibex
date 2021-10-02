@@ -16,77 +16,77 @@ newTrial( "instructions" ,
     defaultText.cssContainer({"margin-bottom":"1em", "text-align":"justify", "font-size":"medium"})
         .print()
     ,
-    newText("instruction_welcome", "Спасибо за Ваш интерес к нашему лингвистическому эксперименту!\
+    newText("instruction-welcome", "Спасибо за Ваш интерес к нашему лингвистическому эксперименту!\
                 Участие в нем займёт около 10-15 минут. ПРОЧТИТЕ, ПОЖАЛУЙСТА, ИНСТРУКЦИЮ ЦЕЛИКОМ.")
     ,
-    newText("instruction_task", "Вашей задачей будет оценить приемлемость предложений по 5-балльной шкале.\
+    newText("instruction-task", "Вашей задачей будет оценить приемлемость предложений по 5-балльной шкале.\
                 Если Вам кажется абсолютно естественным услышать или употребить такое предложение в устной речи,\
                 ставьте оценку 5. Если же Вам кажется, что носитель русского языка так никогда бы не сказал,\
                 ставьте оценку 1. Промежуточные варианты (предложения, которые кажутся Вам допустимыми,\
                 но почему-то не очень хорошими) оценивайте как 4, 3 или 2,\
                 в зависимости от степени их приемлемости для вас.")
     ,
-    newText("instruction_grammaticality", "Например, предложение \"Вася ест стол сырым\" странное по смыслу,\
+    newText("instruction-grammaticality", "Например, предложение \"Вася ест стол сырым\" странное по смыслу,\
                 но полностью грамматически верное. С другой стороны, можно понять смысл предложения\
                 \"Двор стемнел, и мы зажгли лампу\", но грамматически оно недопустимо.")
     ,
-    newText("instruction_intuition", "При оценке ориентируйтесь на собственную интуицию носителя русского языка.\
+    newText("instruction-intuition", "При оценке ориентируйтесь на собственную интуицию носителя русского языка.\
                 Постарайтесь давать оценку быстро, опираясь на свои первые ощущения.")
     ,
-    newText("instruction_scale", "Если кратко, то:<br />\
+    newText("instruction-scale", "Если кратко, то:<br />\
                 “5” - полностью приемлемое для вас предложение<br />\
                 “4” - предложение приемлемо, но звучит несколько неуклюже<br />\
                 “3” - нечто среднее между оценками “2” и “4”<br />\
                 “2” - предложение в принципе приемлемо, но сформулировано плохо, режет ухо<br />\
                 “1” - совершенно неприемлемое для вас предложение")
     ,
-    newText("instruction_keys", "Оценки следует ставить, <b>нажимая цифры на клавиатуре</b> компьютера.")
+    newText("instruction-keys", "Оценки следует ставить, <b>нажимая цифры на клавиатуре</b> компьютера.")
     ,
-    newText("instruction_context", "Предложения в форме <b>могут</b> быть представлены в контексте (но необязательно).\
+    newText("instruction-context", "Предложения в форме <b>могут</b> быть представлены в контексте (но необязательно).\
                 Обратите внимание, оценить нужно только предложение, написанное курсивом,\
                 контекст оценивать не нужно.")
     ,
-    newText("instruction_info", "Укажите, пожалуйста, некоторую информацию о себе. Она будет использована нами\
+    newText("instruction-info", "Укажите, пожалуйста, некоторую информацию о себе. Она будет использована нами\
                 только в обобщённом виде для статистики, и не будет никому передаваться.")
     ,
-    newText("instruction_get_name", "Ваше имя, никнейм или инициалы:").center(),
+    newText("instruction-get-name", "Ваше имя, никнейм или инициалы:").center(),
     newTextInput("PersonId")
         .center().print()
     ,
-    newText("instruction_get_gender", "Ваш пол:").center(),
+    newText("instruction-get-gender", "Ваш пол:").center(),
     newTextInput("PersonGender")
         .center().print()
     ,
-    newText("instruction_get_place", "В каком населенном пункте Вы жили до 13 лет?").center(),
+    newText("instruction-get-place", "В каком населенном пункте Вы жили до 13 лет?").center(),
     newTextInput("PersonPlace")
         .center().print()
     ,
-    newText("instruction_get_age", "Ваш возраст:").center(),
+    newText("instruction-get-age", "Ваш возраст:").center(),
     newTextInput("PersonAge")
         .center().print()
     ,
-    newText("instruction_get_other_languages", "Русский язык является вашим единственным родным языком?").center(),
+    newText("instruction-get-other-languages", "Русский язык является вашим единственным родным языком?").center(),
     newScale("PersonKnowsOther", "да", "нет")
         .labelsPosition("top")
         .center().print()
     ,
     // newTextInput("PersonOtherLanguages").center(),
     // getScale("PersonKnowsOther").test.selected("да")
-    //     .success(newText("instruction_optional_get_languages",
+    //     .success(newText("instruction-optional-get-languages",
     //                 "при желании, укажите эти языки").center())
     // ,
     // getScale("PersonKnowsOther").test.selected("да")
     //     .success(getTextInput("PersonOtherLanguages"))
     // ,                                                                      
-    newText("instruction_thanks", "Спасибо, что помогаете нам и науке!")
+    newText("instruction-thanks", "Спасибо, что помогаете нам и науке!")
     ,
-    newText("instruction_contact_us", "Если у Вас есть вопросы, напишите нам по почте\
+    newText("instruction-contact-us", "Если у Вас есть вопросы, напишите нам по почте\
                 %%ЧЬЯ-ТО ПОЧТА (oa.bazhukov@gmail.com)%%")
     ,
-    newText("instruction_button_form_correctness", "Если кнопка ниже не срабатывает, проверьте,\
+    newText("instruction-button-form-correctness", "Если кнопка ниже не срабатывает, проверьте,\
                 пожалуйста, корректность введённых выше данных.")
     ,
-    newButton("instruction_consent", "Я соглашаюсь участвовать в эксперименте и подтверждаю,<br />\
+    newButton("instruction-consent", "Я соглашаюсь участвовать в эксперименте и подтверждаю,<br />\
                     что русский - мой родной язык, и мне 18 или более лет.")
         .cssContainer({"margin-bottom":"3em", "font-size": "large"})
         .center().print()
@@ -130,7 +130,7 @@ newTrial("context_practice" ,
     //     .print("center at 50%", "center at 20%")
     // ,
     newText("test", "Если я придёт вовремя, то меня не будут ругать")
-        .italic()
+        .bold()
         .print("center at 50%", "center at 30%")
     ,
     
@@ -201,13 +201,27 @@ Template( "examples.csv" ,
             .start()
             .wait()
         ,
+        // newText("context",row.context),
+        // getText("context").test.text(/^.+$/)
+        //     .success(self.print("center at 50%", "center at 20%"))
+        // ,
+        // newText("item",row.item)
+        //     .italic()
+        //       .print("center at 50%", "center at 50%")
+        // ,
         newText("context",row.context),
+        newText("context-item", row.context + "<br />" + "<b>" + row.item + "</b>"),
+        newText("item", row.item).bold(),
         getText("context").test.text(/^.+$/)
-            .success(self.print("center at 50%", "center at 20%"))
-        ,
-        newText("item",row.item)
-            .italic()
-              .print("center at 50%", "center at 50%")
+            .success(
+                getText("context-item")
+                    // .cssContainer({"align-items": "center"})
+                    .print("center at 50%", "center at 30%")
+            )
+            .failure(
+                getText("item")
+                    .print("center at 50%", "center at 40%")
+            )
         ,
         newVar("RT").global().set( v=>Date.now() )
         ,
