@@ -95,7 +95,7 @@ newTrial( "instructions" ,
               .and(getTextInput("PersonId").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonGender").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonPlace").test.text(/^(?:\w+-?|[а-яА-Я]+-?| )+$/))
-              .and(getScale("PersonKnowsOther").test.selected()
+              .and(getScale("PersonKnowsOther").test.selected())
         )
     ,
     // newKey(" ").wait()  // Finish trial upon press on spacebar
@@ -119,7 +119,7 @@ newTrial( "instructions" ,
     .log("PersonPlace", getVar("PersonPlace"))
     .log("PersonAge", getVar("PersonAge"))
     .log("PersonKnowsOther", getVar("PersonKnowsOther"))
-)
+ 
 
 newTrial("context_practice" ,
     defaultText.print()
