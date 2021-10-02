@@ -80,8 +80,9 @@ newTrial( "instructions" ,
     // ,                                                                      
     newText("instruction-thanks", "Спасибо, что помогаете нам и науке!")
     ,
-    newText("instruction-contact-us", "Если у Вас есть вопросы, напишите нам по почте\
-                %%ЧЬЯ-ТО ПОЧТА (oa.bazhukov@gmail.com)%%")
+    newText("instruction-contact-us", 'Если у Вас есть вопросы, напишите нам по почте\
+                <a href="mailto:oa.bazhukov+judg@gmail.com?subject=Вопрос об исследовании">\
+                oa.bazhukov+judg@gmail.com</a>')
     ,
     newText("instruction-button-form-correctness", "Если кнопка ниже не срабатывает, проверьте,\
                 пожалуйста, корректность введённых выше данных.")
@@ -268,7 +269,9 @@ newTrial ( "final" ,
     newText("Вы можете закрыть страницу.")
         .print()
     ,
-    newText("Если у Вас есть вопросы, напишите нам по почте %%ЧЬЯ-ТО ПОЧТА (oa.bazhukov@gmail.com)%%")
+    newText('Если у Вас есть вопросы, напишите нам по почте\
+                <a href="mailto:oa.bazhukov+judg@gmail.com?subject=Вопрос об исследовании">\
+                oa.bazhukov+judg@gmail.com</a>')
         .print()
     ,
     // Stay on this page forever

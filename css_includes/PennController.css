@@ -36,6 +36,21 @@
     font-size: medium;
 }
 
+.instruction-keys-container {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.instruction-thanks-container {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.instruction-contact-us-container {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .context-item {
     padding: 0% 5%;
     /*font-size: x-large;*/
