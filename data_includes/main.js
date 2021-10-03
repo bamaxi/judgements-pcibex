@@ -49,25 +49,34 @@ newTrial( "instructions" ,
     newText("instruction-info", "Укажите, пожалуйста, некоторую информацию о себе. Она будет использована нами\
                 только в обобщённом виде для статистики, и не будет никому передаваться.")
     ,
-    newText("instruction-get-name", "Ваше имя, никнейм или инициалы:").center(),
+    newText("instruction-get-name", "Ваше имя, никнейм или инициалы:"
+                + " <sup id=\"star\">*</sup>").center(),
     newTextInput("PersonId")
         .center().print()
     ,
-    newText("instruction-get-gender", "Ваш пол:").center(),
+    newText("instruction-get-gender", "Ваш пол:"
+                + " <sup id=\"star\">*</sup>").center(),
     newTextInput("PersonGender")
         .center().print()
     ,
-    newText("instruction-get-place", "В каком населенном пункте Вы жили до 13 лет?").center(),
+    newText("instruction-get-place", "В каком населенном пункте Вы жили до 13 лет?"
+                + " <sup id=\"star\">*</sup>").center(),
     newTextInput("PersonPlace")
         .center().print()
     ,
-    newText("instruction-get-age", "Ваш возраст:").center(),
+    newText("instruction-get-age", "Ваш возраст:"
+                + " <sup id=\"star\">*</sup>").center(),
     newTextInput("PersonAge")
         .center().print()
     ,
-    newText("instruction-get-other-languages", "Русский язык является вашим единственным родным языком?").center(),
+    newText("instruction-get-other-languages", "Русский язык является вашим единственным родным языком?" 
+                + " <sup id=\"star\">*</sup>").center(),
     newScale("PersonKnowsOther", "да", "нет")
         .labelsPosition("top")
+        .center().print()
+    ,
+    newText("instruction-get-other-languages", "Укажите эти другие языки при желании:").center(),
+    newTextInput("PersonOtherLanguages")
         .center().print()
     ,
     // newTextInput("PersonOtherLanguages").center(),
@@ -77,7 +86,10 @@ newTrial( "instructions" ,
     // ,
     // getScale("PersonKnowsOther").test.selected("да")
     //     .success(getTextInput("PersonOtherLanguages"))
-    // ,                                                                      
+    // , 
+    newTextInput("instruction-button-form-correctness", "Если кнопка ниже не срабатывает, проверьте,\
+                пожалуйста, корректность введённых выше данных.")
+    ,
     newText("instruction-thanks", "Спасибо, что помогаете нам и науке!")
     ,
     newText("instruction-contact-us", 'Если у Вас есть вопросы, напишите нам по почте\
@@ -96,6 +108,9 @@ newTrial( "instructions" ,
               .and(getTextInput("PersonGender").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonPlace").test.text(/^(?:\w+-?|[а-яА-Я]+-?| )+$/))
               .and(getScale("PersonKnowsOther").test.selected())
+              .and(getTextInput("PersonOtherLanguages").testNot.text(/^.+$/)
+                    .or(getTextInput("PersonOtherLanguages").test.text(/^(?:\w+(?:-|,)?|[а-яА-Я]+(?:-|,)?| )+$/))
+              )
         )
     ,
     // newKey(" ").wait()  // Finish trial upon press on spacebar
@@ -113,13 +128,16 @@ newTrial( "instructions" ,
     ,
     newVar("PersonKnowsOther").global()
         .set(getScale("PersonKnowsOther"))
+    ,
+    newVar("PersonOtherLanguages").global()
+        .set(getTextInput("PersonOtherLanguages"))
 )
     .log("PersonId", getVar("PersonId"))
     .log("PersonGender", getVar("PersonGender"))
     .log("PersonPlace", getVar("PersonPlace"))
     .log("PersonAge", getVar("PersonAge"))
     .log("PersonKnowsOther", getVar("PersonKnowsOther"))
- 
+    .log("PersonOtherLanguages", getVar("PersonOtherLanguages"))
 
 newTrial("context_practice" ,
     defaultText.print()
