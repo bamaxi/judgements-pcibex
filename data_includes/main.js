@@ -59,7 +59,7 @@ newTrial( "instructions" ,
     newTextInput("PersonGender")
         .center().print()
     ,
-    newText("instruction-get-place", "В каком населенном пункте Вы жили до 13 лет?"
+    newText("instruction-get-place", "В каком населенном пункте (в каких пунктах) Вы жили до 13 лет?"
                 + " <sup id=\"star\">*</sup>").center(),
     newTextInput("PersonPlace")
         .center().print()
@@ -106,7 +106,7 @@ newTrial( "instructions" ,
         .wait(getTextInput("PersonAge").test.text(/^(?:18|19|[2-9][0-9])$/)
               .and(getTextInput("PersonId").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonGender").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
-              .and(getTextInput("PersonPlace").test.text(/^(?:\w+-?|[а-яА-Я]+-?| )+$/))
+              .and(getTextInput("PersonPlace").test.text(/^(?:\w+(?:-|,)?|[а-яА-Я]+(?:-|,)?| )+$/))
               .and(getScale("PersonKnowsOther").test.selected())
               .and(getTextInput("PersonOtherLanguages").testNot.text(/^.+$/)
                     .or(getTextInput("PersonOtherLanguages").test.text(/^(?:\w+(?:-|,)?|[а-яА-Я]+(?:-|,)?| )+$/))
