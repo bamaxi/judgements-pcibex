@@ -1,10 +1,15 @@
 PennController.ResetPrefix(null) // Shorten command names (keep this line here))
 
-DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
 
-// Start with welcome screen, then present test trials in a random order,
-// and show the final screen after sending the results
-Sequence("instructions", "context_practice", randomize("experiment") , "send" , "final" )
+// DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
+
+
+Sequence("instructions", "context_practice", randomizeNoMoreThan(
+                anyOf("test", "fillers"),
+                2
+            ),
+        "send", "final"
+)
 
 Header( /* void */ )
     // This .log command will apply to all trials
@@ -26,10 +31,10 @@ newTrial( "instructions" ,
                 но почему-то не очень хорошими) оценивайте как 4, 3 или 2,\
                 в зависимости от степени их приемлемости для вас.")
     ,
-    newText("instruction-grammaticality", "Например, предложение \"Вася ест стол сырым\" странное по смыслу,\
-                но полностью грамматически верное. С другой стороны, можно понять смысл предложения\
-                \"Двор стемнел, и мы зажгли лампу\", но грамматически оно недопустимо.")
-    ,
+    // newText("instruction-grammaticality", "Например, предложение \"Вася ест стол сырым\" странное по смыслу,\
+    //             но полностью грамматически верное. С другой стороны, можно понять смысл предложения\
+    //             \"Двор стемнел, и мы зажгли лампу\", но грамматически оно недопустимо.")
+    // ,
     newText("instruction-intuition", "При оценке ориентируйтесь на собственную интуицию носителя русского языка.\
                 Постарайтесь давать оценку быстро, опираясь на свои первые ощущения.")
     ,
@@ -75,7 +80,7 @@ newTrial( "instructions" ,
         .labelsPosition("top")
         .center().print()
     ,
-    newText("instruction-get-other-languages", "Укажите эти другие языки при желании:").center(),
+    newText("instruction-get-other-languages=", "Укажите эти другие языки при желании:").center(),
     newTextInput("PersonOtherLanguages")
         .center().print()
     ,
@@ -145,28 +150,12 @@ newTrial("context_practice" ,
     // Automatically start and wait for Timer elements when created, and log those events
     defaultTimer.log().start().wait()
     ,
-    // newText("context",)
-    //     .print("center at 50%", "center at 20%")
-    // ,
+
     newText("test", "Если я придёт вовремя, то меня не будут ругать")
         .bold()
         .print("center at 50%", "center at 30%")
     ,
-    
-    // newText("q1", "1"),
-    // newText("q2", "2"),
-    // newText("q3", "3"),
-    // newText("q4", "4"),
-    // newText("q5", "5"),
-    
-    // newSelector("score")
-    //     .disableClicks()
-    //         .add(getText("q1"), getText("q2"),
-    //              getText("q3"), getText("q4"),
-    //              getText("q5"))
-    //         .keys("1", "2", "3", "4", "5")
-    //         .wait()
-    // tooltip to give instructions
+
     newTooltip("guide", "Оцените это предложение от 1 до 5, <br />\
                     где 1 - неприемлемое предложение,<br />\
                     а 5 - полностью приемлемое")
@@ -207,13 +196,12 @@ newTrial("context_practice" ,
     getText("test").remove()          // End of trial, remove "target"
 )
 
-// Executing experiment from example_list.csv table, where participants are divided into four groups (A - D)
-Template( "examples.csv" , 
-    row => newTrial( "experiment" ,   
-        // Display all Text elements centered on the page, and log their display time code
-        // defaultText.center().print("center at 50vw","middle at 50vh").log()
-        // ,
-        // Automatically start and wait for Timer elements when created, and log those events
+
+Template(
+    GetTable("examples.csv")
+        .filter( "type" , /lbe/ )
+    ,
+    row => newTrial( "test" ,
         defaultTimer.log().start().wait()
         ,
         newTimer("break", 300)
@@ -254,27 +242,62 @@ Template( "examples.csv" ,
               .wait()
         ,
         getVar("RT").set( v=>Date.now()-v )
-        // End of trial, move to next one
     )
-    // .log("Group"     , row.group)      // Append group (A vs B) to each result line
-    // .log("Condition" , row.condition)  // Append condition (tr. v op. v fi.) to each result line
-    // .log("Expected"  , row.expected )  // Append expectped (f vs j) to each result line
-    // .log("PrimeType", row.primetype )  // Append prime type (rel. vs unr.) to each result line
-    // .log("context", row.context)       // log context also
-    // .log("target", row.target)         // log target as well
     .log("group", row.group)
     .log("pair_id", row.pair_id)
     .log("item_id", row.item_id)
     .log("context_id", row.context_id)
     .log("type",row.type)
     .log("RT", getVar("RT"))
-    // socio data should potentially be carried to "instruction" or "final" log,
-    //  so it isn't over multiplied
-    // .log("PersonId", getVar("PersonId"))
-    // .log("PersonGender", getVar("PersonGender"))
-    // .log("PersonPlace", getVar("PersonPlace"))
-    // .log("PersonAge", getVar("PersonAge"))
-)
+);
+
+
+Template(
+    GetTable("examples.csv")
+        .filter( "type" , /(?:m|p)q/ ) 
+    ,
+    row => newTrial( "fillers" ,
+        defaultTimer.log().start().wait()
+        ,
+        newTimer("break", 300)
+            .start()
+            .wait()
+        ,
+        newText("context",row.context),
+        newText("context-item", row.context + "<br />" + "<b>" + row.item + "</b>"),
+        newText("item", row.item).bold(),
+        getText("context").test.text(/^.+$/)
+            .success(
+                getText("context-item")
+                    // .cssContainer({"align-items": "center"})
+                    .print("center at 50%", "center at 30%")
+            )
+            .failure(
+                getText("item")
+                    .print("center at 50%", "center at 40%")
+            )
+        ,
+        newVar("RT").global().set( v=>Date.now() )
+        ,
+        newScale("score", 5)
+            .center()
+            .cssContainer({"font-size": "medium"})
+            .labelsPosition("top")
+            .keys()
+            .log()
+              .print("center at 50%", "center at 80%")
+              .wait()
+        ,
+        getVar("RT").set( v=>Date.now()-v )
+    )
+    .log("group", row.group)
+    .log("pair_id", row.pair_id)
+    .log("item_id", row.item_id)
+    .log("context_id", row.context_id)
+    .log("type",row.type)
+    .log("RT", getVar("RT"))
+);
+
 
 // Send the results
 SendResults("send")
