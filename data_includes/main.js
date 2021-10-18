@@ -139,6 +139,8 @@ newTrial( "instructions" ,
     .log("PersonAge", getVar("PersonAge"))
     .log("PersonRussianOnly", getVar("PersonRussianOnly"))
     .log("PersonOtherLanguages", getVar("PersonOtherLanguages"))
+    .log("Square", GetURLParameter("withsquare"))
+
 
 newTrial("context_practice" ,
     defaultText.print()
