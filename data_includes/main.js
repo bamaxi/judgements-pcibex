@@ -1,7 +1,7 @@
 PennController.ResetPrefix(null) // Shorten command names (keep this line here))
 
 
-// DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
+DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
 
 
 Sequence("instructions", "context_practice", randomizeNoMoreThan(
@@ -70,6 +70,12 @@ newTrial( "instructions" ,
     newTextInput("PersonAge")
         .center().print()
     ,
+    newText("instruction-get-lingedu", "Являетесь ли Вы лингвистом/учитесь ли Вы на лингвиста?"
+                + " <sup id=\"star\">*</sup>").center(),
+    newScale("PersonLinguist", "да", "нет")
+        .labelsPosition("top")
+        .center().print()
+    ,
     newText("instruction-get-other-languages", "Русский язык является вашим единственным родным языком?" 
                 + " <sup id=\"star\">*</sup>").center(),
     newScale("PersonRussianOnly", "да", "нет")
@@ -108,6 +114,7 @@ newTrial( "instructions" ,
               .and(getTextInput("PersonId").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonGender").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonPlace").test.text(/^(?:\w+(?:-|,)?|[а-яА-Я]+(?:-|,)?| )+$/))
+              .and(getScale("PersonLinguist").test.selected())
               .and(getScale("PersonRussianOnly").test.selected())
               .and(getTextInput("PersonOtherLanguages").testNot.text(/^.+$/)
                     .or(getTextInput("PersonOtherLanguages").test.text(/^(?:\w+(?:-|,)?|[а-яА-Я]+(?:-|,)?| )+$/))
@@ -127,6 +134,9 @@ newTrial( "instructions" ,
     newVar("PersonAge").global()
         .set(getTextInput("PersonAge"))
     ,
+    newVar("PersonLinguist").global()
+        .set(getScale("PersonLinguist"))
+    ,
     newVar("PersonRussianOnly").global()
         .set(getScale("PersonRussianOnly"))
     ,
@@ -137,6 +147,7 @@ newTrial( "instructions" ,
     .log("PersonGender", getVar("PersonGender"))
     .log("PersonPlace", getVar("PersonPlace"))
     .log("PersonAge", getVar("PersonAge"))
+    .log("PersonLinguist", getVar("PersonLinguist"))
     .log("PersonRussianOnly", getVar("PersonRussianOnly"))
     .log("PersonOtherLanguages", getVar("PersonOtherLanguages"))
     .log("Square", GetURLParameter("withsquare"))
