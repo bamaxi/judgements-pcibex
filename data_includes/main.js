@@ -25,16 +25,12 @@ newTrial( "instructions" ,
                 Участие в нем займёт около 10-15 минут. ПРОЧТИТЕ, ПОЖАЛУЙСТА, ИНСТРУКЦИЮ ЦЕЛИКОМ.")
     ,
     newText("instruction-task", "Вашей задачей будет оценить приемлемость предложений по 5-балльной шкале.\
-                Если Вам кажется абсолютно естественным услышать или употребить такое предложение в устной речи,\
-                ставьте оценку 5. Если же Вам кажется, что носитель русского языка так никогда бы не сказал,\
+                Если Вам кажется абсолютно естественным услышать/увидеть  или употребить такое предложение,\
+                ставьте оценку 5. Если же Вам кажется, что носитель русского языка так никогда бы  не сказал/не написал,\
                 ставьте оценку 1. Промежуточные варианты (предложения, которые кажутся Вам допустимыми,\
                 но почему-то не очень хорошими) оценивайте как 4, 3 или 2,\
                 в зависимости от степени их приемлемости для вас.")
     ,
-    // newText("instruction-grammaticality", "Например, предложение \"Вася ест стол сырым\" странное по смыслу,\
-    //             но полностью грамматически верное. С другой стороны, можно понять смысл предложения\
-    //             \"Двор стемнел, и мы зажгли лампу\", но грамматически оно недопустимо.")
-    // ,
     newText("instruction-intuition", "При оценке ориентируйтесь на собственную интуицию носителя русского языка.\
                 Постарайтесь давать оценку быстро, опираясь на свои первые ощущения.")
     ,
@@ -48,7 +44,7 @@ newTrial( "instructions" ,
     newText("instruction-keys", "Оценки следует ставить, <b>нажимая цифры на клавиатуре</b> компьютера.")
     ,
     newText("instruction-context", "Предложения в форме <b>могут</b> быть представлены в контексте (но необязательно).\
-                Обратите внимание, оценить нужно только предложение, написанное курсивом,\
+                Обратите внимание, оценить нужно только предложение, написанное <b>жирным шрифтом</b>,\
                 контекст оценивать не нужно.")
     ,
     newText("instruction-info", "Укажите, пожалуйста, некоторую информацию о себе. Она будет использована нами\
@@ -76,7 +72,7 @@ newTrial( "instructions" ,
     ,
     newText("instruction-get-other-languages", "Русский язык является вашим единственным родным языком?" 
                 + " <sup id=\"star\">*</sup>").center(),
-    newScale("PersonKnowsOther", "да", "нет")
+    newScale("PersonRussianOnly", "да", "нет")
         .labelsPosition("top")
         .center().print()
     ,
@@ -85,11 +81,11 @@ newTrial( "instructions" ,
         .center().print()
     ,
     // newTextInput("PersonOtherLanguages").center(),
-    // getScale("PersonKnowsOther").test.selected("да")
+    // getScale("PersonRussianOnly").test.selected("да")
     //     .success(newText("instruction-optional-get-languages",
     //                 "при желании, укажите эти языки").center())
     // ,
-    // getScale("PersonKnowsOther").test.selected("да")
+    // getScale("PersonRussianOnly").test.selected("да")
     //     .success(getTextInput("PersonOtherLanguages"))
     // , 
     newTextInput("instruction-button-form-correctness", "Если кнопка ниже не срабатывает, проверьте,\
@@ -112,7 +108,7 @@ newTrial( "instructions" ,
               .and(getTextInput("PersonId").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonGender").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonPlace").test.text(/^(?:\w+(?:-|,)?|[а-яА-Я]+(?:-|,)?| )+$/))
-              .and(getScale("PersonKnowsOther").test.selected())
+              .and(getScale("PersonRussianOnly").test.selected())
               .and(getTextInput("PersonOtherLanguages").testNot.text(/^.+$/)
                     .or(getTextInput("PersonOtherLanguages").test.text(/^(?:\w+(?:-|,)?|[а-яА-Я]+(?:-|,)?| )+$/))
               )
@@ -131,8 +127,8 @@ newTrial( "instructions" ,
     newVar("PersonAge").global()
         .set(getTextInput("PersonAge"))
     ,
-    newVar("PersonKnowsOther").global()
-        .set(getScale("PersonKnowsOther"))
+    newVar("PersonRussianOnly").global()
+        .set(getScale("PersonRussianOnly"))
     ,
     newVar("PersonOtherLanguages").global()
         .set(getTextInput("PersonOtherLanguages"))
@@ -141,7 +137,7 @@ newTrial( "instructions" ,
     .log("PersonGender", getVar("PersonGender"))
     .log("PersonPlace", getVar("PersonPlace"))
     .log("PersonAge", getVar("PersonAge"))
-    .log("PersonKnowsOther", getVar("PersonKnowsOther"))
+    .log("PersonRussianOnly", getVar("PersonRussianOnly"))
     .log("PersonOtherLanguages", getVar("PersonOtherLanguages"))
 
 newTrial("context_practice" ,
