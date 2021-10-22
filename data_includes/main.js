@@ -1,7 +1,7 @@
 PennController.ResetPrefix(null) // Shorten command names (keep this line here))
 
 
-DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
+// DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
 
 
 Sequence("instructions", "context_practice", randomizeNoMoreThan(
@@ -143,6 +143,7 @@ newTrial( "instructions" ,
     newVar("PersonOtherLanguages").global()
         .set(getTextInput("PersonOtherLanguages"))
 )
+    .setOption("hideProgressBar",true)
     .log("PersonId", getVar("PersonId"))
     .log("PersonGender", getVar("PersonGender"))
     .log("PersonPlace", getVar("PersonPlace"))
@@ -327,3 +328,4 @@ newTrial ( "final" ,
     // Stay on this page forever
     newButton().wait()
 )
+.setOption("countsForProgressBar",false)

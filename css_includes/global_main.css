@@ -13,11 +13,10 @@ div.bar-container {
     border: 1px solid;
     border-color: #9ea4b1;
     background-color: white;
-    display: none; /* Get rid of bar-container */
+    margin-top: -4em;
 }
 div.bar {
     background-color: blue;
-    display: none; /* Get rid of bar */
 }
 p.progress-text {
     padding-top: 0.5em;
