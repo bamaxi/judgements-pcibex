@@ -100,8 +100,8 @@ newTrial( "instructions" ,
     newText("instruction-thanks", "Спасибо, что помогаете нам и науке!")
     ,
     newText("instruction-contact-us", 'Если у Вас есть вопросы, напишите нам по почте\
-                <a href="mailto:oa.bazhukov+judg@gmail.com?subject=Вопрос об исследовании">\
-                oa.bazhukov+judg@gmail.com</a>')
+                <a href="mailto:judgmentworkshop@yandex.ru?subject=Вопрос об исследовании">\
+                judgmentworkshop@yandex.ru</a>')
     ,
     newText("instruction-button-form-correctness", "Если кнопка ниже не срабатывает, проверьте,\
                 пожалуйста, корректность введённых выше данных.")
@@ -323,8 +323,8 @@ newTrial ( "final" ,
     newText('Если у Вас есть вопросы или Вы хотите,\
                 чтобы мы рассказали Вам о цели и результатах эксперимента\
                 по завершении исследования, напишите нам по почте\
-                <a href="mailto:oa.bazhukov+judg@gmail.com?subject=Вопрос об исследовании">\
-                oa.bazhukov+judg@gmail.com</a>')
+                <a href="mailto:judgmentworkshop@yandex.ru?subject=Вопрос об исследовании">\
+                judgmentworkshop@yandex.ru</a>')
         .print()
     ,
     // Stay on this page forever
