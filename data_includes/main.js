@@ -113,7 +113,7 @@ newTrial( "instructions" ,
         .wait(getTextInput("PersonAge").test.text(/^(?:18|19|[2-9][0-9])$/)
               .and(getTextInput("PersonId").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
               .and(getTextInput("PersonGender").test.text(/^(?:\w+|[а-яА-Я]+| )+$/))
-              .and(getTextInput("PersonPlace").test.text(/^(?:\w+(?:-|,)?|[а-яА-Я]+(?:-|,)?| )+$/))
+              .and(getTextInput("PersonPlace").test.text(/^.+$/))
               .and(getScale("PersonLinguist").test.selected())
               .and(getScale("PersonRussianOnly").test.selected())
               .and(getTextInput("PersonOtherLanguages").testNot.text(/^.+$/)
